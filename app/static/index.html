@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page-by-page paper review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<!-- ---------------------------------------------------------------- upload -->
+<section class="gate" id="gate">
+  <div class="gate-inner">
+    <p class="eyebrow">Local paper review</p>
+    <h1>Read a paper one page at a time.</h1>
+    <p class="lede">Upload a PDF. Every page is rendered, sent to the model you configured
+      in <code>.env</code>, and comes back with a summary of what the page does and a list of
+      what looks wrong, doubtful, or worth improving.</p>
+
+    <label class="drop" id="drop" for="file">
+      <input type="file" id="file" accept="application/pdf" hidden>
+      <span class="drop-main">Drop a PDF here, or click to choose</span>
+      <span class="drop-sub" id="drop-sub">—</span>
+    </label>
+
+    <div class="gate-status" id="gate-status" hidden></div>
+
+    <dl class="gate-meta" id="gate-meta"></dl>
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------------- review -->
+<div class="app" id="app" hidden>
+  <header class="head">
+    <div class="head-top">
+      <div class="brand" id="brand">document.pdf</div>
+      <div class="tally" id="tally"></div>
+      <div class="head-tools">
+        <button class="chip" id="f-all" aria-pressed="true">All</button>
+        <button class="chip" id="f-error" aria-pressed="false">Errors</button>
+        <button class="chip" id="f-warning" aria-pressed="false">Warnings</button>
+        <button class="chip" id="f-minor" aria-pressed="false">Minor</button>
+        <span class="tool-gap"></span>
+        <button class="chip" id="cross-btn" hidden>Across pages</button>
+        <button class="chip" id="dl-md">Report .md</button>
+        <button class="chip" id="dl-json">.json</button>
+        <button class="chip solo" id="reset">New PDF</button>
+      </div>
+    </div>
+    <div class="spine" id="spine" aria-label="Pages"></div>
+    <div class="progress" id="progress"><span id="progress-bar"></span></div>
+  </header>
+
+  <div class="shell">
+    <nav class="rail" aria-label="Page index">
+      <div class="rail-head" id="rail-head">Page index · what each page does</div>
+      <div id="rows"></div>
+    </nav>
+
+    <main class="reader" id="reader">
+      <div class="reader-bar">
+        <button class="chip" id="prev">← Prev</button>
+        <button class="chip" id="next">Next →</button>
+        <span class="pg" id="pglabel"></span>
+        <span class="spacer"></span>
+        <button class="chip" id="z-fit" aria-pressed="true">Fit</button>
+        <button class="chip" id="z-100" aria-pressed="false">100%</button>
+        <button class="chip" id="z-150" aria-pressed="false">150%</button>
+      </div>
+      <img class="sheet fit" id="sheet" alt="">
+    </main>
+
+    <aside class="notes" id="notes"><div class="notes-inner" id="notes-inner"></div></aside>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
