@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify Page-by-page Review"
+  short_description: "Drive and prove the local PDF review UI"
+  default_prompt: "Use $verify-page-by-page-review to verify the Page-by-page Review app through its real browser interface."
